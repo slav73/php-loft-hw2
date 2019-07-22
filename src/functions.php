@@ -6,8 +6,11 @@ function task1 ($stringsArray, $concatenate = false)
             echo "<p>", $value, "</p>";
         }
     } else {
-        $concatenatedString = implode(' ', $stringsArray);
-        echo "<p>", $concatenatedString, "</p>";
+        echo '<p>';
+        foreach($stringsArray as $key => $value) {
+            echo $value;
+        }
+        echo '</p>';
     }
 }
 
@@ -15,21 +18,22 @@ function task2 ($string, ...$numbers) {
     $acc = 0;
     switch($string) {
         case '-':
-        foreach ($numbers as $n) {
-            $acc -= $n;
-        }
-        break;
+            foreach ($numbers as $n) {
+                $acc -= $n;
+            }
+            break;
         case '*':
-        $acc = 1;
-        foreach ($numbers as $n) {
-            $acc *= $n;
-        }
+            foreach ($numbers as $n) {
+                $acc = $n * $acc;
+            }
         break;
-        case '/':
-        $acc = 1;
-        foreach ($numbers as $n) {
-            $acc /= $n;
-        }
+        case '/':            
+            foreach ($numbers as $key => $n) {
+                if ($key == 0) {
+                    $acc = $n;
+                }
+                $acc = $n / $acc;
+            }
         break;
         default:
             foreach ($numbers as $n) {
@@ -44,15 +48,17 @@ function task3($num1, $num2) {
     if (!is_int($num1) || !is_int($num2)) {
         echo "Числа должны быть целыми";
     } else {
+        ($num1 * $num2 < 0) ? $sign = '-' : $sign = '';
+        $num1 = abs($num1);
+        $num2 = abs($num2);
         echo '<table width="500px" border="1px" align="center">';
         for ($i = 1; $i <= $num1; $i++) {
             echo '<tr>';
             for ($j = 1; $j <= $num2; $j++) {
-                echo '<td align="center">', $i * $j, '</td>';
+                echo '<td align="center">', $sign, $i * $j, '</td>';
             }    
             echo '</tr>';
-        }
-        
+        }       
         echo '</table>';
     }
 }
