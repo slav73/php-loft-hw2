@@ -56,3 +56,22 @@ function task3($num1, $num2) {
         echo '</table>';
     }
 }
+
+function task4() {
+    echo date('d.m.Y H:i', time());
+    echo PHP_EOL;
+    echo strtotime('24.02.2016 00:00:00');
+}
+
+function task5($string) {
+    if (strstr($string, "Карл")) {
+        echo str_replace('К', '', $string), PHP_EOL;
+    } else {
+        echo str_replace('Две', 'Три', $string), PHP_EOL;
+    }
+}
+
+function task6($string) {
+    file_put_contents('test.txt', $string);
+    echo file_get_contents('test.txt');
+}
